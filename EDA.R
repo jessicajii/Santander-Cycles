@@ -1,12 +1,12 @@
 ## Empty list object
 weekly_data = list()
 ## List all the .csv file names (and sort them in case they are not ordered by number)
-file_names = sort(list.files('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/', pattern='.csv'))
+file_names = sort(list.files('~/Documents/github/Santander-Cycles/santander_bikes_data/', pattern='.csv'))
 ## Total number of files
 n_weeks = length(file_names)
 ## Import the last 6 weeks of data
 for(week in (n_weeks-5):n_weeks){
-  weekly_data[[week]] = read.table(paste('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/',file_names[week],sep=''), 
+  weekly_data[[week]] = read.table(paste('~/Documents/github/Santander-Cycles/santander_bikes_data/',file_names[week],sep=''), 
                                    sep=',', header=FALSE, col.names=c('start_id','end_id','start_time','duration'))
 }
 ## Create a unique dataframe
@@ -15,7 +15,7 @@ df = dplyr::bind_rows(weekly_data)
 str(df)
 
 # locations
-stations = read.table('~/Documents/github/Santander-Cycles-Network/santander_locations.csv', sep=',', header=TRUE)
+stations = read.table('~/Documents/github/Santander-Cycles/santander_locations.csv', sep=',', header=TRUE)
 
 # Distance matrix in km
 library(geodist)
