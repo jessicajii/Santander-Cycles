@@ -4,7 +4,7 @@
 ## Empty list object
 weekly_data = list()
 ## List all the .csv file names (and sort them in case they are not ordered by number)
-file_names = sort(list.files('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/', pattern='.csv'))
+file_names = sort(list.files('~/Documents/github/Santander-Cycles/santander_bikes_data/', pattern='.csv'))
 file_names = file_names[1:which(grepl('261',file_names))]
 ## Total number of files
 n_weeks = length(file_names)
@@ -12,7 +12,7 @@ n_weeks = length(file_names)
 ## Training set
 weekly_data_train = list()
 for(week in (n_weeks-5):(n_weeks-2)){
-  weekly_data_train[[week]] = read.table(paste('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/',file_names[week],sep=''), 
+  weekly_data_train[[week]] = read.table(paste('~/Documents/github/Santander-Cycles/santander_bikes_data/',file_names[week],sep=''), 
                                          sep=',', header=FALSE, col.names=c('start_id','end_id','start_time','duration'))
 }
 df_train = dplyr::bind_rows(weekly_data_train)
@@ -21,17 +21,17 @@ df_train = transform(df_train, end_time = start_time + duration)
 ## Test set
 weekly_data_test = list()
 for(week in (n_weeks-1):n_weeks){
-  weekly_data_test[[week]] = read.table(paste('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/',file_names[week],sep=''), 
+  weekly_data_test[[week]] = read.table(paste('~/Documents/github/Santander-Cycles/santander_bikes_data/',file_names[week],sep=''), 
                                         sep=',', header=FALSE, col.names=c('start_id','end_id','start_time','duration'))
 }
 df_test = dplyr::bind_rows(weekly_data_test)
 df_test = transform(df_test, end_time = start_time + duration)
 
 ## Import stations
-stations = read.table('~/Documents/github/Santander-Cycles-Network/santander_locations.csv', sep=',', header=TRUE)
+stations = read.table('~/Documents/github/Santander-Cycles/santander_locations.csv', sep=',', header=TRUE)
 
 ## Load some utility functions
-source('~/Documents/github/Santander-Cycles-Network/hawkes_utility.R')
+source('~/Documents/github/Santander-Cycles/hawkes_utility.R')
 
 ## Filter **all** times (not separately per station)
 set.seed(123)
