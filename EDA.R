@@ -291,3 +291,8 @@ hist(log(as.numeric(Hyde_df1$distance) +1), prob = TRUE, xlab = "log(distance+1)
 lines(density(log(as.numeric(Hyde_df1$distance) +1), na.rm= TRUE), col="blue", lwd=2) # add a density estimate with defaults
 lines(density(log(as.numeric(Hyde_df1$distance) +1), adjust=2, na.rm= TRUE), lty="dotted", col="darkgreen", lwd=2)  # add another "smoother" density
 dev.off()
+
+## Proportion of journeys started and ended at the same station                                         
+props = as.vector(by(df$start_id == df$end_id, INDICES=df$start_id, FUN=mean, simplify=TRUE))
+plot(rev(sort(props)),type='s', xlab='Index (sorted by proportion)', 
+     ylab='Proportion of journeys to/from the same station')                                       
