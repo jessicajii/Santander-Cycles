@@ -5,18 +5,18 @@
 weekly_data = list()
 weekly_data_test = list()
 ## List all the .csv file names (and sort them in case they are not ordered by number)
-file_names = sort(list.files('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/', pattern='.csv'))
+file_names = sort(list.files('~/Documents/github/Santander-Cycles/santander_bikes_data/', pattern='.csv'))
 ## Total number of files
 n_weeks = length(file_names)
 ## Import 4 weeks of data as training set
 for(week in (n_weeks-5):(n_weeks-2)){
-  weekly_data[[week]] = read.table(paste('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/',file_names[week],sep=''), 
+  weekly_data[[week]] = read.table(paste('~/Documents/github/Santander-Cycles/santander_bikes_data/',file_names[week],sep=''), 
                           sep=',', header=FALSE, 
                           col.names=c('start_id','end_id','start_time','duration'))
 }
 ## Last 2 weeks as test set
 for(week in (n_weeks-1):n_weeks){
-  weekly_data_test[[week]] = read.table(paste('~/Documents/github/Santander-Cycles-Network/santander_bikes_data/',file_names[week],sep=''), 
+  weekly_data_test[[week]] = read.table(paste('~/Documents/github/Santander-Cycles/santander_bikes_data/',file_names[week],sep=''), 
                                    sep=',', header=FALSE, 
                                    col.names=c('start_id','end_id','start_time','duration'))
 }
@@ -28,7 +28,7 @@ df = transform(df, end_time = start_time + duration)
 df_test = dplyr::bind_rows(weekly_data)
 df_test = transform(df, end_time = start_time + duration)
 ## Import stations
-stations = read.table('~/Documents/github/Santander-Cycles-Network/santander_locations.csv', sep=',', header=TRUE)
+stations = read.table('~/Documents/github/Santander-Cycles/santander_locations.csv', sep=',', header=TRUE)
 
 ## Function to calculate C_sequence
 ##    - t is the vector of reference times (Hyde Park starting times)
