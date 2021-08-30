@@ -1,4 +1,4 @@
-# Santander-Cycles-Network
+# Santander-Cycles
 
 Modelling Bike-Sharing Systems Using Mutually and Self Exciting Point Processes
 
